@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract BankAccount {
+    // Mapping to keep track of balances for each customer
+    mapping(address => uint256) balances;
+
+    // Deposit function to add money to the customer's account
+    function deposit(uint256 amount) public {
+        require(amount >=  0, "Deposit amount must be greater than zero");
+        balances[msg.sender] =balances[msg.sender] + amount;
+    }
+
+    // Withdraw function to remove money from the customer's account
+    function withdraw(uint256 amount) public {
+        require(amount <= balances[msg.sender], "Insufficient balance");
+        balances[msg.sender] = balances[msg.sender] - amount;
+
+    }
+
+    // Show balance function to display the current balance of the customer
+    function showBalance() public view returns (uint256) {
+        return balances[msg.sender];
+    }
+}
+
